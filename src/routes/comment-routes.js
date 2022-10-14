@@ -24,6 +24,15 @@ router.post('/', async (req, res) => {
   console.log(req.body)
   obj = req.body
 
+  if (!obj.UserId) {
+    res.status(400).send({ error: "UserId required" })
+    return
+  }
+  if (!obj.PostId) {
+    res.status(400).send({ error: "PostId required" })
+    return
+  }
+
   await cRepo.insert(obj)
 
   res.status(201).send()
